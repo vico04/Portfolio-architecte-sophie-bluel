@@ -3,7 +3,7 @@ import { openModal } from "./modal.js";
 export const getCategories = async () => {
     const response = await fetch("http://localhost:5678/api/categories");
     const data = await response.json();
-    return [{ id: 0, name: "Tous" }, ...data];
+    return [{ id: 0, name: "Tous" }, ...data]; //nouveau tableau en ajoutant la catégorie "Tous"
 };
 
 //fonction réutilisable récupération des données
@@ -83,7 +83,7 @@ const displayCategory = (category) => {
     //Attribut data du bouton
     baliseButton.dataset.categoryId = category.id;
 
-    //Tous garde le clicked par défaut
+    //"Tous" garde le clicked par défaut
     if (category.name === "Tous") {
         baliseButton.classList.add("clicked");
     }
@@ -105,9 +105,9 @@ const displayCategory = (category) => {
 };
 
 const displayModal = () => {
-    const editionModeTxt2 = document.querySelector(".editionModeTxt2");
-    if (editionModeTxt2) {
-        editionModeTxt2.addEventListener("click", (event) => {
+    const modifyTxt = document.querySelector(".modifyTxt");
+    if (modifyTxt) {
+        modifyTxt.addEventListener("click", (event) => {
             //annuler l'action du lien par défaut
             event.preventDefault();
             openModal();
@@ -133,7 +133,7 @@ const logout = () => {
 
 const userLogged = () => {
     const editionMode = document.querySelector(".editionMode");
-    const editionModeTxt2Link = document.getElementById("editionModeTxt2Link");
+    const modifyTxtLink = document.getElementById("modifyTxtLink");
     const filterCategories = document.querySelector(".filter");
     const spaceBetween = document.querySelector(".gallery");
     const logginButton = document.getElementById("login");
@@ -143,7 +143,7 @@ const userLogged = () => {
     if (localStorage.getItem("token")) {
         //Affichage des éléments admin
         editionMode.style.display = "flex";
-        editionModeTxt2Link.style.display = "flex";
+        modifyTxtLink.style.display = "flex";
         filterCategories.style.display = "none";
         spaceBetween.style.marginTop = "50px";
         logginButton.style.display = "none";
@@ -151,7 +151,7 @@ const userLogged = () => {
     } else {
         //Non affichage des éléments admin
         editionMode.style.display = "none";
-        editionModeTxt2Link.style.display = "none";
+        modifyTxtLink.style.display = "none";
         filterCategories.style.display = "flex";
         logginButton.style.display = "block";
         logoutButton.style.display = "none";
@@ -161,7 +161,7 @@ const userLogged = () => {
 const init = async () => {
     //Initialisation des works
     const works = await getWorks();
-    window.works = works;
+    window.works = works; //Stocker les travaux récupérés
     // faire la boucle sur works et dans la boucle déclarer ce que je veux faire (displayWork)
     works.forEach((work) => {
         displayWork(work);
