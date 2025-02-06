@@ -127,7 +127,7 @@ export const openModal = () => {
     displayGalleryModal();
 };
 
-//Mise à jour de la gallery
+// Mise à jour de la gallery
 const updateMainGallery = async () => {
     try {
         const response = await fetch("http://localhost:5678/api/works");
@@ -285,7 +285,7 @@ const addNewProject = async (event) => {
             // Appel de la fonction pour ajouter le projet à la galerie
             displayWork(newWork);
 
-            //Appel de la mise à jour de la gallery
+            // //Appel de la mise à jour de la gallery
             updateMainGallery();
 
             // Réinitialisation du formulaire
